@@ -1,4 +1,4 @@
-# wordpacker
+# Wordpacker
 Given a shape like a wordsquare, finds words that fit that shape.
 
 You provide it with a topology file and a dictionary (one word per line, [a-z] only), Some example topology files:
@@ -35,3 +35,9 @@ All length 7 palindromes
 ```
 
 And whatever else you like.
+
+Run as such (if you have 16 cores)
+```
+julia Orchestrator.jl -O3 -t16 square/6 some_az_only_dictionary
+```
+
