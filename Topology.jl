@@ -136,17 +136,19 @@ end
 # (dictionary filename, letterposition, letter) -> letter frequency at letterposition
 function precompute_frequence_table(topology)
 	table = Dict()
+	cache = Dict()
 	for path in topology
-		# TODO: we can (and should) cache over paths of equivalent shape
-		#if haskey(table, path)
-		#	continue
-		#end
+		path_norm = normalize([path])[1]
+		if haskey(cache, path_norm)
+			table[path] = cache[path_norm]
+			continue
+		end
 
 		d = load_dictionary(path[1], path[2])
 		table[path] = []
 
 		for i in 1:length(path[1])
-			push!(table[path], zeros(27))
+			push!(table[path], zeros(26))
 		end
 
 		for word in d
@@ -154,6 +156,8 @@ function precompute_frequence_table(topology)
 				table[path][i][findfirst(x -> x == word[i], "abcdefghijklmnopqrstuvwxyz{")] += 1
 			end
 		end
+
+		cache[path_norm] = table[path]
 	end
 	return table
 end
