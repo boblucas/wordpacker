@@ -43,6 +43,6 @@ add Folds, StaticArrays, DataStructures, IterTools, Combinatorics
 
 Run as such (if you have 16 cores)
 ```
-julia Orchestrator.jl -O3 -t16 square/6 some_az_only_dictionary
+julia -O3 -t16 Orchestrator.jl square/6 some_az_only_dictionary
 ```
 
